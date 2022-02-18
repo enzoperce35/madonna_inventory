@@ -1,4 +1,4 @@
-module UserHelper
+module UsersHelper
   def user_is_principal
     current_user.username == 'pipoy'
   end

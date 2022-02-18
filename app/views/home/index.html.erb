@@ -1,2 +1,3 @@
-<%= link_to 'sign_up', new_user_registration_path %>
-<%= link_to 'sign_out', destroy_user_session_path, method: 'delete' %>
+<% if user_signed_in? %>
+  <%= render 'home/welcome_page' if user_has_no_branch %>
+<% end %>

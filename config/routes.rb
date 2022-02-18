@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'user/update'
-  devise_for :users
+  get 'users/update'
   root 'home#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  devise_for :users
+  
+  patch '/users/update/:id', to: 'users#update', as: 'branch_update'
 end
