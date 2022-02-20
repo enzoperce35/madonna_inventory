@@ -10,10 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_18_205652) do
+ActiveRecord::Schema.define(version: 2022_02_19_232348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.datetime "time_in"
+    t.datetime "time_out"
+    t.text "note"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
+  create_table "inventory_items", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "unit"
+    t.float "margin"
+    t.float "stock"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "inventory_updates", force: :cascade do |t|
+    t.string "action"
+    t.float "amount"
+    t.text "note"
+    t.bigint "user_id"
+    t.bigint "inventory_item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["inventory_item_id"], name: "index_inventory_updates_on_inventory_item_id"
+    t.index ["user_id"], name: "index_inventory_updates_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
