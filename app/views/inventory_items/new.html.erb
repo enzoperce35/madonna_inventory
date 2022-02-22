@@ -1,0 +1,18 @@
+<%= form_for @item do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+  
+  <%= f.label :type %><br>
+  <%= f.text_field :item_type %><br>
+  
+  <%= f.label :unit %><br>
+  <%= f.text_field :unit %><br>
+  
+  <%= f.label :stock %><br>
+  <%= f.number_field :stock %><br>
+  
+  <%= f.label :margin %><br>
+  <%= f.number_field :margin %><br><br>
+  
+  <%= f.button :submit %>
+<% end %>

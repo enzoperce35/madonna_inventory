@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(version: 2022_02_19_232348) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.string "name"
-    t.string "category"
+    t.string "item_type"
     t.string "unit"
     t.float "margin"
     t.float "stock"
+    t.datetime "re_stock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

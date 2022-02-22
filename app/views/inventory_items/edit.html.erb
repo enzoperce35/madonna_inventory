@@ -1,0 +1,23 @@
+<h3 style="color: rgb(111, 240, 25);">
+  <strong><%= @item.name %></strong>
+  <%= link_to '[X]', inventory_item_path(@item), method: 'delete', data: {confirm: 'Are you sure you want to delete this inventory item?'}%>
+</h3>
+
+<%= form_for @item do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+  
+  <%= f.label :type %><br>
+  <%= f.text_field :item_type %><br>
+  
+  <%= f.label :unit %><br>
+  <%= f.text_field :unit %><br>
+  
+  <%= f.label :stock %><br>
+  <%= f.number_field :stock %><br>
+  
+  <%= f.label :margin %><br>
+  <%= f.number_field :margin %><br><br>
+  
+  <%= f.button :submit %>
+<% end %><br>

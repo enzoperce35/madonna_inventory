@@ -1,0 +1,10 @@
+<div class="container center">
+  <h3 style="color: rgb(111, 240, 25);">
+    <strong><%= link_to @item.name, edit_inventory_item_path(@item), method: 'get' %></strong>
+  </h3>
+    
+  <p class="inv-sections">
+    <em>current_stock:</em>&nbsp
+    <%= @item.stock %>&nbsp<%= @item.unit %>
+  </p><hr>
+</div>

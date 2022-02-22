@@ -1,0 +1,25 @@
+<table class = 'table'>
+  <thead>
+    <tr>
+      <th>Item <%= link_to '+', new_inventory_item_path, method: 'get' %></th>
+      <th>Stock</th>
+      <th>Last Re-stock</th>
+    </tr>
+  </thead>
+  
+  <% @items.each do |item| %>
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to item.name, inventory_item_path(item), method: 'get' %>
+        </td>
+        <td>
+          <%= item.stock%>
+        </td>
+        <td>
+          <%= item.re_stock.strftime('%b %e') %>
+        </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
