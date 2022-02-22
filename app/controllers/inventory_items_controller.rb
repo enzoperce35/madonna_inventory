@@ -37,12 +37,8 @@ class InventoryItemsController < ApplicationController
 
   def update
     @item = InventoryItem.find(params[:id])
-    previous = @item.stock
-    current = params[:inventory_item][:stock]
     
     if @item.update(inventory_item_params)
-      update_re_stock(@item) if stock_added(previous, current)
-      
       redirect_to inventory_items_path, notice: 'edit successful'
     else
       redirect_back(fallback_location: root_path, notice: 'edit unsuccessful')
@@ -53,13 +49,5 @@ class InventoryItemsController < ApplicationController
 
   def inventory_item_params
     params.require(:inventory_item).permit(:name, :item_type, :unit, :margin, :stock)
-  end
-
-  def update_re_stock(item)
-    item.update(re_stock: DateTime.now)
-  end
-
-  def stock_added(previous, current)
-    current.to_i > previous
   end
 end

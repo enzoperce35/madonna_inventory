@@ -6,7 +6,6 @@ class CreateInventoryItems < ActiveRecord::Migration[6.1]
       t.string :unit
       t.float :margin
       t.float :stock
-      t.timestamp :re_stock
 
       t.timestamps
     end

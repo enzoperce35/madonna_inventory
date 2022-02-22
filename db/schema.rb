@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2022_02_19_232348) do
     t.string "unit"
     t.float "margin"
     t.float "stock"
-    t.datetime "re_stock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
