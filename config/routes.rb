@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   patch '/users/update/:id', to: 'users#update', as: 'branch_update'
 
   resources :inventory_items
+  resources :inventory_updates
 end
