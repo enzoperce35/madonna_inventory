@@ -1,3 +1,27 @@
 // Place all the styles related to the inventory_updates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+@media screen and (min-width: 1000px) {
+
+  #title {
+    margin-left: 24%;
+    margin-top: 15px;
+  }
+
+  #main-receipt {
+    border-style: double;
+    width: 400px;
+    padding-bottom: 10px;
+  }
+
+  .action {
+    float: right;
+    margin-top: 30px;
+  }
+
+  #dot-line {
+    margin: auto;
+    overflow: hidden;
+  }
+}

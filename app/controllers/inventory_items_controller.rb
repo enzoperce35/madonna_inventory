@@ -45,6 +45,16 @@ class InventoryItemsController < ApplicationController
     end
   end
 
+  def apply_update
+    stock_update = InventoryUpdate.find(params[:id])
+    update_items = stock_update.items
+    
+    helpers.confirm(stock_update)
+    helpers.modify(update_items)
+    
+    redirect_to inventory_items_path, method:'get'
+  end
+
   private
 
   def inventory_item_params

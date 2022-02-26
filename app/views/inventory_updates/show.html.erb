@@ -1,2 +1,47 @@
-<h1>InventoryUpdates#show</h1>
-<p>Find me in app/views/inventory_updates/show.html.erb</p>
+<div class="container">
+  <div class="container" id="main-receipt" style="float:left">
+    
+    <h4 id='title'>Check Out Ticket</h4>
+
+    <% unless @update.note.nil? || @update.note.blank? %>
+      <br><em>Note: <%= @update.note %></em><br>
+    <% end %>
+
+    <p id="dot-line"><%= create_dots %></p>
+    
+    <% @update.items.each do |item| %>
+      <% inventory = InventoryItem.find_by(id: item.inventory_item_id) %>
+      <div class="parent-container d-flex">
+        <div class="container">
+          <%= inventory.name %>
+        </div>
+        
+        <div class="container" style="width: 50%;">
+          <div style="float: left;">
+            <%= ommit_zero_decimal(item.amount) %>
+          </div>
+
+          <div style="float:right">
+            <%= inventory.unit %>
+          </div>
+        </div>
+      </div>    
+    <% end %>
+
+    <p id="dot-line"><%= create_dots %></p>
+  
+    <div class="action btn-group btn-group-sm" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-light">
+        <%= link_to 'confirm',item_update_path(@update), method: 'patch' %>
+      </button>
+      
+      <button type="button" class="btn btn-light">
+        <%= link_to 'edit', edit_inventory_update_path(@update), method: 'get' %>
+      </button>
+      
+      <button type="button" class="btn btn-light">
+        <%= link_to 'cancel',inventory_update_path(@update), method: 'delete' %>
+      </button>
+    </div>
+  </div>
+</div>
