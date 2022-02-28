@@ -1,0 +1,27 @@
+<% @check_outs.each do |check_out| %>
+  <% author = User.find(check_out.user_id) %>
+
+  <% check_out.items.each do |item| %>
+    <% inventory_item = InventoryItem.find(item.inventory_item_id) %>
+    <% color = assign_color_to(author.branch) %>
+  
+    <p style="color: #49488f; font-style: italic">
+      <em >
+        <%= item.created_at.strftime('%H:%M') %>
+      </em>&nbsp
+    
+      <em style="color: #2789fa;">
+        <%= ommit_zero_decimal(item.amount) %>
+        <%= inventory_item.name %>
+      </em>
+      
+      was checked out for
+    
+      <em style=<%= color %>>
+        <%= author.branch %>
+      </em>
+    
+      branch
+    </p>
+  <% end %>
+<% end %>

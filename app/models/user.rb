@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :inventory_updates
+  has_many :items, through: :inventory_updates
 
   has_many :attendances
   

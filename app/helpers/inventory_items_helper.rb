@@ -9,4 +9,8 @@ module InventoryItemsHelper
       item.update(stock: item.stock - u.amount)
     end
   end
+
+  def is_invalid(update)
+    update.confirmed == false || update.action != 'de-stock'
+  end
 end

@@ -1,7 +1,5 @@
-<% if user_signed_in? %>
-  <% if user_has_no_branch %>
-    <%= render 'home/welcome_page' %>
-  <% else %>
-    <%= link_to 'Update Inventory', new_inventory_update_path, method: 'get' %>
-  <% end %>
+<% if user_has_no_branch %>
+  <%= render 'home/welcome_page' %>
+<% elsif user_is_principal%>
+  <%= render 'admin_activities' %>
 <% end %>

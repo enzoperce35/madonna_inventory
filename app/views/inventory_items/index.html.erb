@@ -1,9 +1,19 @@
 <table class = 'table'>
   <thead>
     <tr>
-      <th>Item <%= link_to '+', new_inventory_item_path, method: 'get' %></th>
-      <th>Stock</th>
-      <th>Last Re-stock</th>
+      <th>
+        Item
+        <% if user_is_principal %>
+          <%= link_to '+', new_inventory_item_path, method: 'get' %>
+        <% end %>
+      </th>
+
+      <th>
+        Stock
+        <% if user_is_admin %>
+          <%= link_to '-', new_inventory_update_path, method: 'get' %>
+        <% end %>
+      </th>
     </tr>
   </thead>
   
@@ -13,11 +23,10 @@
         <td>
           <%= link_to item.name, inventory_item_path(item), method: 'get' %>
         </td>
+        
         <td>
-          <%= item.stock%>
-        </td>
-        <td>
-          <%= item.updated_at.strftime('%b %e') %>
+          <%= ommit_zero_decimal(item.stock) %>
+          <%= item.unit %>
         </td>
       </tr>
     </tbody>

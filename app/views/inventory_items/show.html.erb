@@ -1,10 +1,36 @@
-<div class="container center">
-  <h3 style="color: rgb(111, 240, 25);">
-    <strong><%= link_to @item.name, edit_inventory_item_path(@item), method: 'get' %></strong>
-  </h3>
-    
-  <p class="inv-sections">
-    <em>current_stock:</em>&nbsp
-    <%= @item.stock %>&nbsp<%= @item.unit %>
-  </p><hr>
-</div>
+<h3 style="color: rgb(111, 240, 25);">
+  <strong>
+    <% if user_is_principal %>
+      <%= link_to @item.name, edit_inventory_item_path(@item), method: 'get' %>
+    <% else %>
+      <%= @item.name %>
+    <% end %>
+  </strong>
+</h3><br>
+  
+<table class='table'>
+<caption style="text-align:right">Check-Out History</caption>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <% @check_outs.all.each do |check_out| %>
+        <% update = InventoryUpdate.find(check_out.inventory_update_id) %>
+      
+        <% next if is_invalid(update) %>
+      
+        <td><%= check_out.updated_at.strftime("%a, %B %d") %></td>
+        
+        <td>
+          <%= ommit_zero_decimal(check_out.amount) %>
+          <%= @item.unit %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

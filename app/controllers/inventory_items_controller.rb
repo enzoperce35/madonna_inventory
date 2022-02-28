@@ -19,6 +19,7 @@ class InventoryItemsController < ApplicationController
 
   def show
     @item = InventoryItem.find(params[:id])
+    @check_outs = Item.where(inventory_item_id: @item.id).order(updated_at: :desc)
   end
 
   def destroy
