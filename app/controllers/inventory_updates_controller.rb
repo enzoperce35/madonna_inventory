@@ -4,6 +4,13 @@ class InventoryUpdatesController < ApplicationController
     
     @update = InventoryUpdate.new
     @update.items.build
+    @action = params[:process].present? ? params[:process] : 'de-stock'
+  end
+
+  def index
+    @date_item = params[:date].to_date
+
+    @updates = InventoryUpdate.where(updated_at: @date_item.beginning_of_day..@date_item.end_of_day).order(updated_at: :desc)
   end
 
   def create

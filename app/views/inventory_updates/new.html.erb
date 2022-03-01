@@ -29,10 +29,11 @@
       <%= link_to_add_row('Add Item', f, :items, class: 'btn btn-primary') %>
     </div>
     <div style="float: right;">
-       <%= f.button(:submit, "Check Out", class: 'btn btn-primary btn-secondary') %>
+      <% submit = @action == 're-stock' ? 'Add Stocks' : "Check Out" %>
+      <%= f.button(:submit, submit, class: 'btn btn-primary btn-secondary') %>
     </div>
   </div>
 
-  <%= f.hidden_field :action, value: 'de-stock' %>
+  <%= f.hidden_field :action, value: @action %>
   <%= f.hidden_field :user_id, value: current_user.id %>
 <% end %>

@@ -1,0 +1,46 @@
+<table class='table'>
+  <caption>
+    <%= @date_item.strftime("%B %d") %>
+    Records
+  </caption>
+  
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Branch</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @updates.each do |update| %>
+      <% author = User.find(update.user_id) %>
+      
+      <% next if is_invalid(update) %>
+
+      <% update.items.each do |item| %>
+        <% inventory_item = InventoryItem.find(item.inventory_item_id) %>
+      
+        <tr>
+          <td>
+            <%= inventory_item.name %>
+          </td>
+        
+          <td>
+            <%= ommit_zero_decimal(item.amount) %>
+            <%= inventory_item.unit %>
+          </td>
+
+          <td>
+            <%= author.branch %>
+          </td>
+          
+          <td>
+            <%= author.username %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

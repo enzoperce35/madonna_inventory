@@ -14,7 +14,12 @@ class InventoryItemsController < ApplicationController
   end
 
   def index
-    @items = InventoryItem.all
+    @items =
+      if helpers.user_is_principal
+        InventoryItem.order(updated_at: :desc) 
+      else
+        InventoryItem.all.order(:name)
+      end
   end
 
   def show
@@ -49,9 +54,10 @@ class InventoryItemsController < ApplicationController
   def apply_update
     stock_update = InventoryUpdate.find(params[:id])
     update_items = stock_update.items
+    action = stock_update.action
     
     helpers.confirm(stock_update)
-    helpers.modify(update_items)
+    helpers.modify(update_items, action)
     
     redirect_to inventory_items_path, method:'get'
   end

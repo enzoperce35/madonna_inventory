@@ -1,7 +1,13 @@
 <div class="container">
   <div class="container" id="main-receipt" style="float:left">
     
-    <h4 id='title'>Check Out Ticket</h4>
+    <h4 id='title'>
+      <% if @update.action == 're-stock' %>
+        Re-stock Ticket
+      <% else %>
+        Check Out Ticket
+      <% end %>
+    </h4>
 
     <% unless @update.note.nil? || @update.note.blank? %>
       <br><em>Note: <%= @update.note %></em><br>

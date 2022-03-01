@@ -11,7 +11,8 @@ module ApplicationHelper
 
   def user_is_admin
     current_user.present? &&
-    current_user.username == 'inso'
+    (current_user.username == 'inso' ||
+     current_user.username == 'jenny')
   end
 
   def user_is_dev
@@ -20,7 +21,7 @@ module ApplicationHelper
   end
   
   def branch_name
-    if !user_signed_in? || user_has_no_branch
+    if !user_signed_in? || user_has_no_branch || user_is_principal
       ''
     else
       current_user.branch.prepend(' - ')
@@ -38,5 +39,19 @@ module ApplicationHelper
 
   def ommit_zero_decimal(num)
     num == num.to_i ? num.to_i : num
+  end
+
+  def humanize(date)
+    if Date.today.strftime('%a, %b. %d') == date
+      'Today'
+    elsif Date.yesterday.strftime('%a, %b. %d') == date
+      'Yesterday'
+    else
+      date
+    end
+  end
+
+  def is_invalid(update)
+    update.confirmed == false || update.action != 'de-stock'
   end
 end

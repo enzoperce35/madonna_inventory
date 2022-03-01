@@ -1,34 +1,5 @@
-<table class = 'table'>
-  <thead>
-    <tr>
-      <th>
-        Item
-        <% if user_is_principal %>
-          <%= link_to '+', new_inventory_item_path, method: 'get' %>
-        <% end %>
-      </th>
+<button class="btn btn-outline-secondary" style="float: right;">
+  <%= link_to 'Check Out Items', new_inventory_update_path, method: 'get' %>
+</button><br>
 
-      <th>
-        Stock
-        <% if user_is_admin %>
-          <%= link_to '-', new_inventory_update_path, method: 'get' %>
-        <% end %>
-      </th>
-    </tr>
-  </thead>
-  
-  <% @items.each do |item| %>
-    <tbody>
-      <tr>
-        <td>
-          <%= link_to item.name, inventory_item_path(item), method: 'get' %>
-        </td>
-        
-        <td>
-          <%= ommit_zero_decimal(item.stock) %>
-          <%= item.unit %>
-        </td>
-      </tr>
-    </tbody>
-  <% end %>
-</table>
+<%= render 'table' %>

@@ -7,10 +7,8 @@
     <div>
       <div id= "main-menu">
         <% if user_signed_in? %>
-          <% if user_is_principal %>
-            <%= link_to 'Inventory', inventory_items_path, method: 'get' %>
-          <% end %>
-          
+          <%= link_to 'Inventory', inventory_items_path, method: 'get' %>
+         
           <%= render 'layouts/burger_nav' %>
         <% else %>
           <%= link_to 'Sign_in', new_user_session_path %>

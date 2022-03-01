@@ -1,27 +1,42 @@
-<% @check_outs.each do |check_out| %>
-  <% author = User.find(check_out.user_id) %>
-
-  <% check_out.items.each do |item| %>
+<% captions = [] %>
+<% @activities.each do |activity| %>
+  <% author = User.find(activity.user_id) %>
+  
+  <% activity.items.each do |item| %>
+    <% caption = item.updated_at.strftime('%a, %b. %d') %>
     <% inventory_item = InventoryItem.find(item.inventory_item_id) %>
     <% color = assign_color_to(author.branch) %>
-  
-    <p style="color: #49488f; font-style: italic">
+
+    <% if !captions.include?(caption) %>
+      <% captions.push(caption) %>
+      
+      <em style="font-style: italic; color:sienna">
+        <%= link_to humanize(caption), inventory_updates_path(date: item.updated_at), method: 'get' %>
+      </em>
+    <% end %>
+    
+    <p style="color: #49488f; font-style: italic; margin-left:15px">
       <em >
         <%= item.created_at.strftime('%H:%M') %>
       </em>&nbsp
     
       <em style="color: #2789fa;">
         <%= ommit_zero_decimal(item.amount) %>
-        <%= inventory_item.name %>
+        <%= inventory_item.unit %>
       </em>
       
-      was checked out for
-    
-      <em style=<%= color %>>
-        <%= author.branch %>
+      of
+        
+      <em style="color: #2789fa;">
+        <%= inventory_item.name %>
       </em>
-    
-      branch
+
+      <% if activity.action == 'de-stock' %>
+        <%= render 'check_out_template', author: author, color: color %>
+      <% else %>
+        was added to main Inventory
+      <% end %>
     </p>
   <% end %>
 <% end %>
+<br><br>

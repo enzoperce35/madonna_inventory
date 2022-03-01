@@ -3,14 +3,23 @@ module InventoryItemsHelper
     stock_update.update(confirmed: true)
   end
 
-  def modify(update_items)
-    update_items.each do |u|
-      item = InventoryItem.find(u.inventory_item_id)
+  def apply(action, item, u)
+    case action
+    when 're-stock'
+      item.update(stock: item.stock + u.amount)
+    when 'de-stock'
       item.update(stock: item.stock - u.amount)
     end
   end
 
-  def is_invalid(update)
-    update.confirmed == false || update.action != 'de-stock'
+  def modify(update_items, action)
+    update_items.each do |u|
+      item = InventoryItem.find(u.inventory_item_id)
+      apply(action, item, u)
+    end
+  end
+
+  def below_margin(item)
+    item.margin >= item.stock
   end
 end
