@@ -13,3 +13,8 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import 'packs/nested_form.js'
+
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
+import 'packs/select2.js'

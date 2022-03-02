@@ -5,7 +5,10 @@
   </td>
 
   <td>
-    <%= f.input :inventory_item_id, label: false, collection: @collection %><br>
+    <%= f.input :inventory_item_id,
+     label: false,
+     collection: @collection,
+     input_html: {id: 'item', class: 'item-input' } %><br>
   </td>
 
   <td></td>
