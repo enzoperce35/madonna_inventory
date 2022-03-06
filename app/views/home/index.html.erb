@@ -1,7 +1,7 @@
 <% if user_has_no_branch %>
   <%= render 'welcome_page' %>
 <% elsif user_is_dev %>
-  <%= render 'dev_page' %>
+  <%= render 'dev_page' if InventoryUpdate.first.present? %>
 <% elsif user_is_principal %>
   <%= render 'admin_activities' %>
 <% end %>

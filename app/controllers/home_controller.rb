@@ -11,5 +11,15 @@ class HomeController < ApplicationController
     updates = params[:updates]
 
     InventoryUpdate.where(confirmed: updates).destroy_all
+
+    redirect_back(fallback_location: root_path)
+  end
+
+  def delete_month
+    start = Date.parse(params[:start])
+    
+    InventoryUpdate.where(created_at: start.beginning_of_month..start.end_of_month).destroy_all
+
+    redirect_back(fallback_location: root_path)
   end
 end

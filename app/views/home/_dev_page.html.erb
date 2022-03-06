@@ -1,3 +1,8 @@
+<% time_start = InventoryUpdate.first.created_at %>
+<% time_end = InventoryUpdate.last.created_at %>
+<% start_month = time_start.strftime('%B') %>
+<% end_month = time_end.strftime('%B') %>
+
 <div class="parent-container d-flex">
   <div class="container">
     <em class='subject'>
@@ -44,8 +49,8 @@
     <em class='data'>
       &nbsp&nbsp months covered ~
       <em class="data-value">
-        <%= InventoryUpdate.first.created_at.strftime('%B') %> -
-        <%= InventoryUpdate.last.created_at.strftime('%B') %>  
+        <%= start_month %> -
+        <%= end_month %>  
       </em>
     </em>
   </div>
@@ -54,6 +59,10 @@
     <em></em><br>
     <em></em><br><br>
     <em><%= link_to 'delete_all_unconfirmed', delete_updates_path(updates: false), method: 'delete' %></em><br><br>
-    <em></em><br>
+    <em>
+      <% if time_difference(time_start, time_end) > 4 %>
+        <%= link_to 'delete_whole ' + start_month, delete_month_path(start: time_start), method: 'delete' %>
+      <% end %>
+    </em><br>
   </div>
 </div>        
