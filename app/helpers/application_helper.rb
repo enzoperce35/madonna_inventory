@@ -6,22 +6,23 @@ module ApplicationHelper
   
   def user_is_principal
     current_user.present? &&
-    current_user.username == 'pipoy'
+    current_user.branch == 'General'
   end
 
   def user_is_admin
     current_user.present? &&
-    (current_user.username == 'inso' ||
-     current_user.username == 'jenny')
+    (current_user.branch == 'Sampaguita' ||
+     current_user.branch == 'Muntingpulo')
   end
 
   def user_is_dev
     current_user.present? &&
+    current_user.branch == 'General' &&
     current_user.username == 'inso'
   end
   
   def branch_name
-    if !user_signed_in? || user_has_no_branch || user_is_principal
+    if !user_signed_in? || user_has_no_branch || user_is_principal || user_is_dev
       ''
     else
       current_user.branch.prepend(' - ')
@@ -53,5 +54,11 @@ module ApplicationHelper
 
   def is_invalid(update)
     update.confirmed == false || update.action != 'de-stock'
+  end
+
+  def smart_coerce(amount, unit)
+    unit = amount < 2 ? unit.singularize : unit
+    
+    ommit_zero_decimal(amount).to_s + ' ' + unit
   end
 end

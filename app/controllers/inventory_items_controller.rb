@@ -14,12 +14,17 @@ class InventoryItemsController < ApplicationController
   end
 
   def index
-    @items =
-      if helpers.user_is_principal
-        InventoryItem.order(updated_at: :desc) 
-      else
-        InventoryItem.all.order(:name)
-      end
+    user_start = params[:start]
+    user_end = params[:end]
+    @picker = params[:picker]
+    @order = params[:order]
+      
+    @begin_date = user_start.nil? ? Date.today.beginning_of_week : user_start.to_date
+    @end_date = user_end.nil? ? Date.today : user_end.to_date
+      
+    @updates = InventoryUpdate.where(updated_at: @begin_date.beginning_of_day..@end_date.end_of_day)
+
+    @items = helpers.apply_order(@order)
   end
 
   def show

@@ -25,3 +25,10 @@
     overflow: hidden;
   }
 }
+
+.table {
+  caption-side: top;
+  #caption {
+    text-align: right;
+  }
+}

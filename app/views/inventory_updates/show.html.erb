@@ -37,9 +37,13 @@
     <p id="dot-line"><%= create_dots %></p>
   
     <div class="action btn-group btn-group-sm" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-light">
-        <%= link_to 'confirm',item_update_path(@update), method: 'patch' %>
-      </button>
+      <% if target_branch_is_on(@update) %>
+        <button type="button" class="btn btn-light">
+          <%= link_to 'confirm',item_update_path(@update), method: 'patch' %>
+        </button>
+      <% else %>
+        <% flash.alert = 'No check-out branch input!, click edit to to modify form and continue' %>
+      <% end %>
       
       <button type="button" class="btn btn-light">
         <%= link_to 'edit', edit_inventory_update_path(@update), method: 'get' %>

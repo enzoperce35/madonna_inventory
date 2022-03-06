@@ -6,4 +6,10 @@ class HomeController < ApplicationController
       redirect_to new_inventory_update_path, method: 'get'
     end
   end
+
+  def delete_updates
+    updates = params[:updates]
+
+    InventoryUpdate.where(confirmed: updates).destroy_all
+  end
 end

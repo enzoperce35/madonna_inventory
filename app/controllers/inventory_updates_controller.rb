@@ -51,6 +51,6 @@ class InventoryUpdatesController < ApplicationController
   private
 
   def item_update_params
-    params.require(:inventory_update).permit(:action, :note, :user_id, items_attributes: Item.attribute_names.map(&:to_sym).push(:_destroy))
+    params.require(:inventory_update).permit(:action, :note, :user_id, :updated_branch, items_attributes: Item.attribute_names.map(&:to_sym).push(:_destroy))
   end
 end

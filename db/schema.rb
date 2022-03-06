@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_223047) do
 
   create_table "inventory_updates", force: :cascade do |t|
     t.string "action"
+    t.string "updated_branch"
     t.boolean "confirmed", default: false
     t.text "note"
     t.bigint "user_id"

@@ -5,8 +5,22 @@
   </div>
   
   <ul class='nav-menu'>
-    <ul class='nav-item'>
-      <%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %>
+    <ul>
+      <%= link_to 'check out items', new_inventory_update_path, method: 'get' %>
+    </ul>
+
+    <% if user_is_principal %>
+      <ul>
+        <%= link_to 'add new item', new_inventory_item_path, method: 'get' %>
+      </ul>
+
+      <ul>
+        <%= link_to 'add_stocks', new_inventory_update_path(process: 're-stock'), method: 'get' %>
+      </ul>
+    <% end %>
+   
+    <ul>
+      <%= link_to 'sign out', destroy_user_session_path, method: 'delete' %>
     </ul>
   </ul>
 </div>

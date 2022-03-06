@@ -1,15 +1,13 @@
-<h3 style="color: rgb(111, 240, 25);">
-  <strong>
+<table class='table'>
+  <caption id='caption'>
+    Check-Out History(
     <% if user_is_principal %>
       <%= link_to @item.name, edit_inventory_item_path(@item), method: 'get' %>
     <% else %>
       <%= @item.name %>
     <% end %>
-  </strong>
-</h3><br>
-  
-<table class='table'>
-  <caption>Check-Out History</caption>
+    )
+  </caption>
   
   <thead>
     <tr>
@@ -32,17 +30,16 @@
       
       <tr>
         <td>
-          <%= check_out.updated_at.strftime("%a, %b. %d") %>
+          <%= check_out.updated_at.strftime("%b. %d") %>
         </td>
         
         <td>
-          <%= ommit_zero_decimal(check_out.amount) %>
-          <%= @item.unit %>
+          <%= smart_coerce(check_out.amount, @item.unit) %>
         </td>
 
         <% if user_is_principal %>
           <td>
-            <%= author.branch %>
+            <%= update.updated_branch %>
           </td>
           
           <td>

@@ -1,0 +1,15 @@
+<%= form_tag(inventory_items_path, method: :get) do %>
+  <p>
+    <em style="font-style: italic; color:sienna">start:</em><br> 
+    <%= date_field_tag(:start, @begin_date, class: 'form-control') %>
+  </p>
+  
+  <p>
+    <em style="font: italic; color:sienna">end:</em><br>
+    <%= date_field_tag(:end, @end_date, class: 'form-control') %>
+  </p>
+
+  <p>
+    <%= submit_tag 'Check Records'%>
+  </p>
+<% end %>

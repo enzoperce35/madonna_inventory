@@ -1,7 +1,8 @@
 <table class='table'>
-  <caption>
-    <%= @date_item.strftime("%B %d") %>
-    Records
+  <caption id='caption'>
+    Check-Out Records (
+    <%= @date_item.strftime("%B %d") %>)
+    <hr>
   </caption>
   
   <thead>
@@ -28,12 +29,11 @@
           </td>
         
           <td>
-            <%= ommit_zero_decimal(item.amount) %>
-            <%= inventory_item.unit %>
+            <%= smart_coerce(item.amount, inventory_item.unit) %>
           </td>
 
           <td>
-            <%= author.branch %>
+            <%= update.updated_branch %>
           </td>
           
           <td>

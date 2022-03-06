@@ -1,0 +1,59 @@
+<div class="parent-container d-flex">
+  <div class="container">
+    <em class='subject'>
+      users:
+      <em class='data-value'>
+        <%= User.all.count %>
+      </em><br>
+    </em><br>
+      
+    <em class='subject'>
+      inventory_items:
+      <em class='data-value'>
+        <%= InventoryItem.all.count %>
+      </em><br>
+    </em><br>  
+  </div>
+
+  <div class="container">
+    <em></em><br><br>
+    <em></em><br>
+  </div>
+</div>  
+ 
+<div class="parent-container d-flex">
+  <div class="container">
+    <em class="subject">
+      inventory_updates:<br>
+    </em> 
+    
+    <em class='data'>
+      &nbsp&nbsp confirmed ~
+      <em class="data-value">
+        <%= InventoryUpdate.where(confirmed: true).count %>
+      </em><br>
+    </em><br>
+        
+    <em class='data'>
+      &nbsp&nbsp unconfirmed ~
+      <em class="data-value">
+        <%= InventoryUpdate.where(confirmed: false).count %>
+      </em><br>
+    </em><br>     
+        
+    <em class='data'>
+      &nbsp&nbsp months covered ~
+      <em class="data-value">
+        <%= InventoryUpdate.first.created_at.strftime('%B') %> -
+        <%= InventoryUpdate.last.created_at.strftime('%B') %>  
+      </em>
+    </em>
+  </div>
+
+  <div class="container">
+    <em></em><br>
+    <em></em><br><br>
+    <em><%= link_to 'delete_all_unconfirmed', delete_updates_path(updates: false), method: 'delete' %></em><br><br>
+    <em></em><br>
+  </div>
+</div>        

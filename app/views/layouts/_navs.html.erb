@@ -6,7 +6,9 @@
 
     <div>
       <div id= "main-menu">
-        <% if user_signed_in? %>
+        <% if user_has_no_branch %>
+          <%= link_to 'Sign_Out', destroy_user_session_path, method: 'delete' %>
+        <% elsif user_signed_in? %>
           <%= link_to 'Inventory', inventory_items_path, method: 'get' %>
          
           <%= render 'layouts/burger_nav' %>

@@ -1,8 +1,11 @@
 <table class = 'table'>
-
+  
   <caption id='caption'>
-    Inventory Stocks( order: 
-    <%= @order.nil? ? 'updated last' : @order %> )
+    Inventory Updates(
+    <%= @begin_date.strftime('%b. %d(%a)') %> - Now
+    <%= link_to '[ ]', inventory_items_path(picker: '_'), method: 'get' %> )<br>
+    order:
+    <%= @order.nil? ? 'updated last' : @order %>
     <hr>
   </caption>
   
@@ -12,14 +15,19 @@
         Item
         <%= link_to "\u21C5".encode('utf-8'), inventory_items_path(order: next_order(@order)), method: 'get' %>
       </th>
+      
+      <th>Muntingpulo</th>
+
+      <th>Sampaguita</th>
 
       <th>Stock</th>
       
       <th>Category</th>
     </tr>
   </thead>
-  
+
   <% @items.each do |item| %>
+    <% muntingpulo, sampaguita = check_out_sum_of(item) %>
     <tbody>
       <tr>
         <td>
@@ -27,15 +35,21 @@
         </td>
 
         <td>
+          <%= ommit_zero_decimal(muntingpulo) %>
+        </td>
+        
+        <td>
+          <%= ommit_zero_decimal(sampaguita) %>
+        </td>
+        
+        <td>
           <% if below_margin(item) %>
             <em style="color: red;">
-              <%= ommit_zero_decimal(item.stock) %>
+              <%= smart_coerce(item.stock, item.unit) %>
             </em>
           <% else %>
-            <%= ommit_zero_decimal(item.stock) %>
+            <%= smart_coerce(item.stock, item.unit) %>
           <% end %>
-          
-          <%= item.unit %>
         </td>
 
         <td><%= item.item_type %></td>

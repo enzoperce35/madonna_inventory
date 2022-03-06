@@ -1,8 +1,17 @@
 <%= simple_form_for @update do |f| %>
   <%= f.error_notification %>
 
-  <div style="width:80%; float:left">
-    <%= f.input :note, label: false, :input_html => {:rows => 1, :columns => 5}, placeholder: 'Add note here...'%>
+  <div class="container">
+    <div style="float:left">
+      <%= f.input :note, label: false, :input_html => {:rows => 1, :columns => 5}, placeholder: 'Add note here...'%>
+    </div>
+    <div style="float:right">
+      <% if user_is_principal %>
+        <%= f.input :updated_branch, label: 'Check-out Branch', collection: ['Muntingpulo', 'Sampaguita'], placeholder: 'Select Check Out Branch'%>
+      <% else %>
+        <%= f.hidden_field :updated_branch, value: current_user.branch %>
+      <% end %>
+    </div>
   </div>
 
   <table class='table'>

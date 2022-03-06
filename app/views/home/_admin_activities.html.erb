@@ -5,7 +5,7 @@
   <% activity.items.each do |item| %>
     <% caption = item.updated_at.strftime('%a, %b. %d') %>
     <% inventory_item = InventoryItem.find(item.inventory_item_id) %>
-    <% color = assign_color_to(author.branch) %>
+    <% color = assign_color_to(activity.updated_branch) %>
 
     <% if !captions.include?(caption) %>
       <% captions.push(caption) %>
@@ -21,8 +21,7 @@
       </em>&nbsp
     
       <em style="color: #2789fa;">
-        <%= ommit_zero_decimal(item.amount) %>
-        <%= inventory_item.unit %>
+        <%= smart_coerce(item.amount, inventory_item.unit) %>
       </em>
       
       of
@@ -32,7 +31,7 @@
       </em>
 
       <% if activity.action == 'de-stock' %>
-        <%= render 'check_out_template', author: author, color: color %>
+        <%= render 'check_out_template', author: author, color: color, branch: activity.updated_branch %>
       <% else %>
         was added to main Inventory
       <% end %>

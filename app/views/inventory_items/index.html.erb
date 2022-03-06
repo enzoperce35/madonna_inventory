@@ -1,5 +1,6 @@
-<button class="btn btn-outline-secondary" style="float: right;">
-  <%= link_to 'Check Out Items', new_inventory_update_path, method: 'get' %>
-</button><br>
-
-<%= render 'table' %>
+<% if user_is_principal %>
+  <%= render 'date_picker' if @picker.present? %>
+  <%= render 'principal_table' %>
+<% else %>
+  <%= render 'table' %>
+<% end %>
